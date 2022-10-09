@@ -1,0 +1,10 @@
+node_modules
+.husky
+.vscode
+dist
+*.css
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.d.ts
