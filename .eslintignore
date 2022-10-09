@@ -8,3 +8,4 @@ dist
 *.png
 *.gif
 *.d.ts
+vue.config.js

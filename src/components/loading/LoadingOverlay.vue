@@ -19,7 +19,7 @@ import { Overlay } from "vant";
 export default class LoadingOverlay extends Vue {
   @Prop() visible = false;
 
-  uninstall() {
+  uninstall(): void {
     const { $el } = this;
     $el.parentNode && $el.parentNode.removeChild($el);
     this.$destroy();

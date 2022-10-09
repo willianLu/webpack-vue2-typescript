@@ -1,10 +1,10 @@
 import Vue from "vue";
-import Overlay from "./LoadingOverlay.vue";
+import LoadingOverlay from "./LoadingOverlay.vue";
 import { isObject, isString, isNumber } from "@/utils/util";
 import { Toast } from "vant";
 
 // 延迟显示 - 占位背景实例
-const OverlayInstance = Vue.extend(Overlay);
+const OverlayInstance = Vue.extend(LoadingOverlay);
 
 // loading的延迟遮罩组件实例
 const loadingOverlay = new OverlayInstance().$mount(
@@ -43,9 +43,17 @@ interface LoadingOptions {
 }
 
 /**
+ * @description 基础loading类
+ */
+export interface BaseLoading {
+  show(options?: number | string | LoadingOptions): void;
+  hide(): void;
+}
+
+/**
  * 全局插件形式注册组件
  */
-const Loading = {
+const Loading: BaseLoading = {
   /**
    * @description 显示loading使用方法说明
    * @param {Number,String,LoadingOptions} options 不传参，默认为空对像
@@ -56,12 +64,11 @@ const Loading = {
    *   --  delayTime 延迟时长
    *   --  force 立即执行
    */
-  show(options?: number | string | LoadingOptions) {
+  show(options?: number | string | LoadingOptions): void {
     // 清楚上一次的延迟操作
     closeTimeout();
-    console.log(loadingOverlay, "================测试");
     //显示延迟使用遮罩层
-    (<any>loadingOverlay).visible = true;
+    loadingOverlay.$props.visible = true;
     // 持续时长，用于延迟显示loading策略
     let delayTime = 500;
     let message = "";
@@ -87,11 +94,11 @@ const Loading = {
       }, delayTime);
     }
   },
-  hide() {
+  hide(): void {
     // 清楚上一次的延迟操作
     closeTimeout();
     // 关闭遮罩层组件
-    (<any>loadingOverlay).visible = false;
+    loadingOverlay.$props.visible = false;
     if (TOAST) {
       TOAST.clear();
       TOAST = null;

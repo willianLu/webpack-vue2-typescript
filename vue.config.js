@@ -1,7 +1,10 @@
 const merge = require("webpack-merge");
 const tsImportPluginFactory = require("ts-import-plugin");
 
+const isProduction = process.env.NODE_ENV === "production";
+
 module.exports = {
+  productionSourceMap: !isProduction,
   chainWebpack: (config) => {
     config.module
       .rule("ts")

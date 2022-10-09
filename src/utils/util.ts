@@ -1,11 +1,4 @@
 /**
- * @description 判断数据
- * @param {any} data 任意值
- */
-export function isDef(data: any): boolean {
-  return data !== undefined && data !== null;
-}
-/**
  * @description 基础数据类型
  */
 enum DataType {
@@ -21,12 +14,20 @@ enum DataType {
 }
 
 /**
+ * @description 判断数据
+ * @param {any} data 任意值
+ */
+export function isDef(data: any): boolean {
+  return data !== undefined && data !== null;
+}
+
+/**
  * @description 判断数据类型是否是传入的类型
  * @param {any} data 传入数据
  * @param {dataType} type 对比的数据类型
  * @returns {boolean} true | false
  */
-function judgeDataType(data: any, type: string) {
+function judgeDataType(data: any, type: string): boolean {
   return (
     Object.prototype.toString.call(data).toLocaleLowerCase() ===
     `[object ${type}]`
@@ -38,7 +39,7 @@ function judgeDataType(data: any, type: string) {
  * @param {any} data 传入的数据
  * @returns {boolean} true | false
  */
-export function isObject(data: any) {
+export function isObject(data: any): boolean {
   return judgeDataType(data, DataType.OBJECT);
 }
 
@@ -47,7 +48,7 @@ export function isObject(data: any) {
  * @param {any} data 传入的数据
  * @returns {boolean} true | false
  */
-export function isFunction(data: any) {
+export function isFunction(data: any): boolean {
   return judgeDataType(data, DataType.FUNCTION);
 }
 
@@ -56,7 +57,7 @@ export function isFunction(data: any) {
  * @param {any} data 传入的数据
  * @returns {boolean} true | false
  */
-export function isPromise(data: any) {
+export function isPromise(data: any): boolean {
   return judgeDataType(data, DataType.PROMISE);
 }
 
@@ -65,7 +66,7 @@ export function isPromise(data: any) {
  * @param {any} data 传入的数据
  * @returns {boolean} true | false
  */
-export function isError(data: any) {
+export function isError(data: any): boolean {
   return judgeDataType(data, DataType.ERROR);
 }
 
@@ -74,7 +75,7 @@ export function isError(data: any) {
  * @param {any} data 传入的数据
  * @returns {boolean} true | false
  */
-export function isNumber(data: any) {
+export function isNumber(data: any): boolean {
   return judgeDataType(data, DataType.NUMBER) && !window.isNaN(data);
 }
 
@@ -83,7 +84,7 @@ export function isNumber(data: any) {
  * @param {any} data 传入的数据
  * @returns {boolean} true | false
  */
-export function isString(data: any) {
+export function isString(data: any): boolean {
   return judgeDataType(data, DataType.STRING);
 }
 
@@ -92,6 +93,22 @@ export function isString(data: any) {
  * @param {any} data
  * @returns {boolean}
  */
-export function isEmptyObject(data: any) {
+export function isEmptyObject(data: any): boolean {
   return isObject(data) && JSON.stringify(data) === "{}";
+}
+/**
+ * @description 延迟函数
+ * @param {undefuned | number} duration
+ * @param {any} data
+ * @returns {promise<any>}
+ */
+export function deferFun<T>(
+  duration?: number,
+  data?: T
+): Promise<T | undefined> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(data);
+    }, duration || 1000);
+  });
 }
