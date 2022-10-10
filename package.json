@@ -11,6 +11,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "axios": "^1.1.2",
     "core-js": "^3.6.5",
     "vant": "^2.12.50",
     "vue": "^2.6.11",
@@ -33,6 +34,7 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^1.0.3",
+    "axios-mock-adapter": "^1.21.2",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
