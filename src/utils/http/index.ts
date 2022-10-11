@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import interceptors from "./interceptors";
 import { CustomResponseData } from "./tool";
 
@@ -22,7 +22,15 @@ HttpRequest.interceptors.response.use(
 export function request<T, D>(
   config: AxiosRequestConfig<D>
 ): Promise<CustomResponseData<T>> {
-  return HttpRequest.request(config);
+  return new Promise((resolve) => {
+    HttpRequest.request(config)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((error) => {
+        resolve(error);
+      });
+  });
 }
 
 /**
@@ -38,8 +46,12 @@ export function get<T, D>(
   config?: AxiosRequestConfig<D>
 ): Promise<CustomResponseData<T>> {
   config = config || {};
-  config.params = params;
-  return HttpRequest.get(url, config).catch((error) => error);
+  return request({
+    ...config,
+    url,
+    method: "get",
+    params,
+  });
 }
 
 /**
@@ -54,7 +66,13 @@ export function post<T, D>(
   data?: D,
   config?: AxiosRequestConfig<D>
 ): Promise<CustomResponseData<T>> {
-  return HttpRequest.post(url, data, config).catch((error) => error);
+  config = config || {};
+  return request({
+    ...config,
+    url,
+    method: "post",
+    data,
+  });
 }
 
 export default HttpRequest;

@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from "axios";
 // import { isObject } from "@/utils/util";
 
 /**
@@ -29,50 +30,25 @@ export function handleCustomResponseData<T = any>(
 }
 
 /**
- * @description url拼接
- * @param {String} baseUrl 基础域名
- * @param {String} url 请求链接地址
- * @returns {String} 完整的请求地址
- */
-// function joinUrl(baseUrl, url) {
-//   if (baseUrl.lastIndexOf("/") === baseUrl.length - 1) {
-//     baseUrl = baseUrl.substr(baseUrl.length - 1);
-//   }
-//   if (url.indexOf("/") !== 0) {
-//     url = "/" + url;
-//   }
-//   return baseUrl + url;
-// }
-
-/**
  * @description 处理域名规则，多域名服务器预发环境处理
  * @param {Object} options 请求配置数据
  * @returns {String} 处理后的url地址
  */
-// function handleDomainRule(url) {
-//   const { domainMap, baseUrl } = Config;
-//   let isNeedBaseUrl = true;
-//   url = String(url).trim();
-//   if (!Env.isProduct && domainMap && isObject(domainMap)) {
-//     Object.keys(domainMap).some((key) => {
-//       // 使用indexOf判断，预订域名与配置一致，减少处理逻辑
-//       if (url.indexOf(key) === 0) {
-//         url = url.replace(key, domainMap[key]);
-//         isNeedBaseUrl = false;
-//         return true;
-//       }
-//     });
-//   }
-//   // 未配置域名信息，则执行基础域名拼接
-//   if (
-//     isNeedBaseUrl &&
-//     baseUrl &&
-//     ["http://", "https://", "//"].every((key) => url.indexOf(key) !== 0)
-//   ) {
-//     return joinUrl(baseUrl, url);
-//   }
-//   return url;
-// }
+function handleDomainRule(url: string) {
+  // const { domainMap, baseUrl } = Config;
+  url = String(url).trim();
+  // if (!Env.isProduct && domainMap && isObject(domainMap)) {
+  //   Object.keys(domainMap).some((key) => {
+  //     // 使用indexOf判断，预订域名与配置一致，减少处理逻辑
+  //     if (url.indexOf(key) === 0) {
+  //       url = url.replace(key, domainMap[key]);
+  //       isNeedBaseUrl = false;
+  //       return true;
+  //     }
+  //   });
+  // }
+  return url;
+}
 
 /**
  * @description 处理公共参数
@@ -106,13 +82,13 @@ export function handleCustomResponseData<T = any>(
 
 /**
  * @description 处理请求规则，多域名解析，请求公共参数
- * @param {Object} options 请求相关数据
- * @returns {void}
+ * @param {Object} config 请求相关数据
+ * @returns {Object}
  */
-// export function handleRequestRule(options) {
-//   // 请求URL处理
-//   options.url = handleDomainRule(options.url);
-//   // 公共参数处理
-//   handleCommonParams(options);
-//   return options;
-// }
+export function handleRequestRule<D>(config: AxiosRequestConfig<D>) {
+  // 请求URL处理
+  config.url = handleDomainRule(config.url || "");
+  // 公共参数处理
+  // handleCommonParams(options);
+  return config;
+}

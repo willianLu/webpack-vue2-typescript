@@ -1,6 +1,6 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 import { isError } from "../util";
-import { CustomResponseData, handleCustomResponseData } from "./tool";
+import { handleCustomResponseData } from "./tool";
 
 // 发出请求前拦截
 const request = {
@@ -10,7 +10,6 @@ const request = {
    * @returns {object} 处理后的配置数据
    */
   onFufilled<D>(config: AxiosRequestConfig<D>) {
-    //   handleRequestRule(options);
     return config;
   },
   /**
@@ -20,18 +19,13 @@ const request = {
    */
   onRejected(error: any) {
     const isResponseError = error && isError(error);
-    console.log(error, isResponseError, "===============错误拦截");
     if (isResponseError) {
       console.group("接口请求request错误");
       console.error(error);
       console.groupEnd();
     }
     return Promise.reject(
-      handleCustomResponseData(
-        -1,
-        isResponseError ? error.message : error,
-        error
-      )
+      handleCustomResponseData(-1, isResponseError ? error.message : "", error)
     );
   },
 };
@@ -43,9 +37,8 @@ const response = {
    * @param {AxiosResponse} response 请求reponse对象
    * @returns {AxiosResponse} 返回response对象
    */
-  onFufilled<T, D>(response: AxiosResponse<T, D>): any {
-    if (response.data) return response.data as any;
-    return handleCustomResponseData(response.status);
+  onFufilled<T, D>(response: AxiosResponse<T, D>): AxiosResponse<T, D> {
+    return response;
   },
   /**
    * @description 请求返回错误拦截
@@ -60,11 +53,7 @@ const response = {
       console.groupEnd();
     }
     return Promise.reject(
-      handleCustomResponseData(
-        -1,
-        isResponseError ? error.message : error,
-        error
-      )
+      handleCustomResponseData(-1, isResponseError ? error.message : "", error)
     );
   },
 };
