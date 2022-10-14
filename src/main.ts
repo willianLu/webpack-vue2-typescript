@@ -2,6 +2,8 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import "@/config/index";
+
 // 本地开发环境，走mock数据
 if (process.env.NODE_ENV === "development") {
   import("./mock");
