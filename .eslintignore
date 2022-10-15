@@ -8,5 +8,7 @@ dist
 *.png
 *.gif
 *.d.ts
+*.svg
 vue.config.js
 docs
+build

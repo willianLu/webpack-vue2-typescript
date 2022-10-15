@@ -33,6 +33,8 @@ module.exports = {
     },
   },
   pluginOptions: {
+    // 增加less全局预设变量
+    // 需要安装style-resources-loader 和 vue-cli-plugin-style-resources-loader
     "style-resources-loader": {
       preProcessor: "less",
       patterns: [path.resolve(__dirname, "./src/assets/css/preset.less")],
