@@ -1,6 +1,7 @@
 const merge = require("webpack-merge");
 const tsImportPluginFactory = require("ts-import-plugin");
 const path = require("path");
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -60,6 +61,8 @@ module.exports = {
         },
       },
     },
+    // 开启gizp压缩
+    plugins: [new CompressionPlugin()],
   },
   chainWebpack: (config) => {
     config.module

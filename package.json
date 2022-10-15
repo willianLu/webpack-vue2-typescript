@@ -42,6 +42,8 @@
     "axios-mock-adapter": "^1.21.2",
     "chalk": "^4.1.2",
     "commander": "^9.4.0",
+    "compression-webpack-plugin": "^6.1.1",
+    "cross-env": "^7.0.3",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
@@ -61,8 +63,7 @@
     "vuepress": "^1.9.7"
   },
   "nano-staged": {
-    "*.md": "prettier --write",
-    "*.{ts,tsx,js,vue,less}": "prettier --write",
+    "*.{ts,tsx,js,vue,less,md}": "prettier --write",
     "src/**/*.{ts,tsx,js,vue}": "eslint --fix"
   }
 }
