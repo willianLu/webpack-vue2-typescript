@@ -1,22 +1,31 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <div class="flex border-all">
+      <div class="hairline-border-all">all</div>
+      <div class="hairline-border-top">top</div>
+      <div class="hairline-border-right">right</div>
+      <div class="hairline-border-bottom">bottom</div>
+      <div class="hairline-border-left">left</div>
+    </div>
+    <div>
+      <svg-icon name="close" />
+      <svg-icon name="delete" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HelloWorld from "@/components/HelloWorld.vue";
+import SvgIcon from "@/components/SvgIcon.vue";
 import { deferFun } from "@/utils/util";
 import { queryUserInfo, queryBookList } from "@/services/index";
 
 @Component({
   components: {
-    HelloWorld,
+    SvgIcon,
   },
 })
-export default class Home extends Vue {
+export default class ViewHome extends Vue {
   async created() {
     this.$loading.show();
     await deferFun();
@@ -33,7 +42,20 @@ export default class Home extends Vue {
 
   async getBookList() {
     const res = await queryBookList();
-    console.log(res, "================获取列表");
+    console.log(res, "==============获取列表");
   }
 }
 </script>
+
+<style lang="less" scoped>
+.border-all {
+  div {
+    margin: 16px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    background-color: @background-color;
+  }
+}
+</style>

@@ -1,0 +1,82 @@
+@import url("./preset.less");
+
+// 处理0.5px边框
+.hairline-border-all,
+.hairline-border-top,
+.hairline-border-right,
+.hairline-border-bottom,
+.hairline-border-left {
+  position: relative;
+}
+
+.hairline-border-all:before,
+.hairline-border-top:before,
+.hairline-border-right:before,
+.hairline-border-bottom:before,
+.hairline-border-left:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  box-sizing: border-box;
+  border: 0 solid @border-color;
+}
+
+.hairline-border-all:before,
+.hairline-border-top:before,
+.hairline-border-left:before {
+  top: 0;
+  left: 0;
+  transform-origin: left top;
+}
+
+.hairline-border-right:before {
+  top: 0;
+  right: 0;
+  transform-origin: right top;
+}
+
+.hairline-border-bottom:before {
+  bottom: 0;
+  left: 0;
+  transform-origin: left bottom;
+}
+
+.hairline-border-all:before {
+  width: 200%;
+  height: 200%;
+  transform: scale(0.5);
+}
+
+.hairline-border-top:before,
+.hairline-border-bottom:before {
+  width: 100%;
+  height: 0;
+  transform: scaleY(0.5);
+}
+
+.hairline-border-right:before,
+.hairline-border-left:before {
+  width: 0;
+  height: 100%;
+  transform: scaleX(0.5);
+}
+
+.hairline-border-all:before {
+  border-width: 1px;
+}
+
+.hairline-border-top:before {
+  border-top-width: 1px;
+}
+
+.hairline-border-right:before {
+  border-right-width: 1px;
+}
+
+.hairline-border-bottom:before {
+  border-bottom-width: 1px;
+}
+
+.hairline-border-left:before {
+  border-left-width: 1px;
+}

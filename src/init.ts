@@ -1,6 +1,7 @@
 import Vue from "vue";
 import { Toast, Dialog } from "vant";
 import Loading from "@/components/loading";
+import "./icons";
 
 Vue.prototype.$loading = Loading;
 // toast提示框
