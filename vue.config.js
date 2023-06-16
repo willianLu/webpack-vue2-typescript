@@ -6,6 +6,9 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const isProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
+  devServer: {
+    port: 6800,
+  },
   productionSourceMap: !isProduction,
   css: {
     loaderOptions: {

@@ -18,6 +18,9 @@
   "dependencies": {
     "axios": "^1.1.2",
     "core-js": "^3.6.5",
+    "docx": "^8.0.4",
+    "echarts": "^5.4.2",
+    "file-saver": "^2.0.5",
     "vant": "^2.12.50",
     "vue": "^2.7.12",
     "vue-class-component": "^7.2.3",
@@ -26,6 +29,7 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.5",
     "@types/jest": "^24.0.19",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",

@@ -11,6 +11,15 @@
       <svg-icon name="close" />
       <svg-icon name="delete" />
     </div>
+    <div>
+      <button @click="toPage('/about')">to about</button>
+    </div>
+    <div style="margin: 16px 0">
+      <a href="http://localhost:5173">跳转h5页面</a>
+    </div>
+    <div>
+      <a href="http://localhost:5173/#/normal-h5">跳转标注h5页面</a>
+    </div>
   </div>
 </template>
 
@@ -43,6 +52,9 @@ export default class ViewHome extends Vue {
   async getBookList() {
     const res = await queryBookList();
     console.log(res, "==============获取列表");
+  }
+  toPage(path: string) {
+    this.$router.push(path);
   }
 }
 </script>

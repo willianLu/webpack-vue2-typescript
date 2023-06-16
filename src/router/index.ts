@@ -19,6 +19,14 @@ const routes: Array<RouteConfig> = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+  {
+    path: "/user",
+    component: () => import(/* webpackChunkName: "user" */ "@/views/User.vue"),
+  },
+  {
+    path: "/docx",
+    component: () => import("@/views/Docx.vue"),
+  },
 ];
 
 if (process.env.NODE_ENV === "development") {
